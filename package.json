@@ -4,7 +4,11 @@
   "description": "This will be the component that renders the additional items for sale from the seller.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:build": "webpack --watch",
+    "build": "webpack",
+    "dev:start": "nodemon -i src -i public -i npm_modules server",
+    "start": "node server"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,8 @@
     "webpack": "^4.41.5"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2",
+    "webpack-cli": "^3.3.10"
   }
 }
