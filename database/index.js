@@ -1,3 +1,4 @@
+require('dotenv').config();
 // mongoose set up and connection
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true}).
@@ -11,7 +12,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log(`Connected to the db`));
 
 // schema for item
-const Item = require('./Item.js');
+const Schemas = require('./Schemas.js');
 
 
 module.exports.addNewItem = (newItem) => {
@@ -30,4 +31,8 @@ module.exports.addNewItem = (newItem) => {
   });
 
   return itemToBeAdded.save();
+};
+
+module.exports.addManyItems = (arrayOfItems) => {
+  return Schemas.Item.insertMany(arrayOfItems);
 }
