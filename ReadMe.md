@@ -6,4 +6,4 @@ Server start script: npm start
 
 Build script: npm run build
 
-Database seeding script:
+Database seeding script: npm run generate
