@@ -1,6 +1,7 @@
 // this is where my app will start
 const express = require('express');
 require('dotenv').config();
+const db = require('../database');
 
 const app = express();
 const port = process.env.ADDITIONAL_ITEMS_PORT || 3004;
