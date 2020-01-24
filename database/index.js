@@ -1,6 +1,9 @@
 // mongoose set up and connection
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true}).
+  catch((error) => {
+    console.error(error);
+  })
 const db = mongoose.connection;
 
 // error handling or notification when the database connects
@@ -13,7 +16,7 @@ const Item = require('./Item.js');
 
 module.exports.addNewItem = (newItem) => {
 
-  let itemToBeAdded = new Item({
+  let itemToBeAdded = new Schemas.Item({
     itemId: newItem.itemId,
     itemName: newItem.itemName,
     itemPrice: newItem.itemPrice,
