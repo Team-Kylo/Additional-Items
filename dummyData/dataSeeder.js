@@ -3,47 +3,14 @@ Generates fake data for 10 sellers with 10 items each.  Can be modified on line 
 */
 const faker = require('faker');
 const Schemas = require('../database/Schemas.js');
-require('dotenv').config();
-
-// I chose this route because it is actually less code then trying to connect to my current database
-const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true}).
-  catch((error) => {
-    console.error(error);
-  })
-
-const db = mongoose.connection;
-
-// error handling or notification when the database connects
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log(`Connected to the db`));
-
-
-const addNewItem = (newItem) => {
-
-  let itemToBeAdded = new Schemas.Item({
-    itemId: newItem.itemId,
-    itemName: newItem.itemName,
-    itemPrice: newItem.itemPrice,
-    itemPicture: newItem.itemPicture,
-    itemShippingPrice: newItem.itemShippingPrice,
-    sellerPicture: newItem.sellerPicture,
-    sellerName: newItem.sellerName,
-    sellerCountry: newItem.sellerCountry,
-    sellerTotalSales: newItem.sellerTotalSales,
-    sellerJoinDate: newItem.sellerJoinDate,
-  });
-
-  return itemToBeAdded.save();
-}
-
+const db = require('../database');
 
 const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
 
+  let arrayOfFakeData = [];
   let k = 1;
   // needs to start at 10 for the url for the pictures to take up 2 slots
   let i = 10;
-  let arrayOfFakeData = [];
 
   // create a while loop for the seller
   while ( i < numOfSellers + 10 ) {
@@ -57,7 +24,7 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
       sellerPicture: `https://www.placecage.com/300/3${i}`,
     };
 
-    // needs to start at 10 for the url for the pictures
+    // needs to start at 10 for the url for the pictures to take up 2 slots
     let j = 10;
 
     // while loop for the items
@@ -69,7 +36,6 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
         generatedItemInfo[key] = generatedSellerInfo[key];
       }
 
-      // generatedItemInfo = generatedSellerInfo;
       // data for individual items
       generatedItemInfo.itemId =  k;
       generatedItemInfo.itemName = faker.commerce.productName();
@@ -78,16 +44,15 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
       generatedItemInfo.itemShippingPrice = Math.floor(Math.random() * 50);
 
       arrayOfFakeData.push(generatedItemInfo);
-      // increment j by one
+
       j++;
-      // increment k by one
       k++;
     }
 
     i++;
   };
 
-  Schemas.Item.insertMany(arrayOfFakeData).
+  db.addManyItems(arrayOfFakeData).
     then(() => {
       console.log('Seeding was successful to the Kylo Database with Items Documents!')
       // exits the node process
