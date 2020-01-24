@@ -1,5 +1,5 @@
 /*
-Generates fake data for 10 sellers with 8 items each.  Can be modified on line 41 to adjust these numbers.
+Generates fake data for 10 sellers with 10 items each.  Can be modified on line 41 to adjust these numbers.
 */
 const faker = require('faker');
 const Schemas = require('../database/Schemas.js');
@@ -38,7 +38,7 @@ const addNewItem = (newItem) => {
 }
 
 
-const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 8) => {
+const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
 
   let k = 1;
   // needs to start at 10 for the url for the pictures to take up 2 slots
