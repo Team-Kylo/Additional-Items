@@ -33,6 +33,29 @@ module.exports.addNewItem = (newItem) => {
   return itemToBeAdded.save();
 };
 
+module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => {
+  return (
+    Schemas.Item.find({itemId: idOfItem}).
+      then((itemInformation) => {
+        return Schemas.Item.find({sellerName: itemInformation[0].sellerName})
+      }).
+      then((allSellerItems) => {
+        // removing the original item from the returned array
+        let foundFlag = false;
+        let i = 0;
+        while (!foundFlag) {
+          if(allSellerItems[i].itemId == idOfItem) {
+            allSellerItems.splice(i, 1);
+            foundFlag = true;
+          }
+          i++;
+        };
+        console.log(allSellerItems);
+        return allSellerItems;
+      })
+  )
+}
+
 module.exports.addManyItems = (arrayOfItems) => {
   return Schemas.Item.insertMany(arrayOfItems);
 }
