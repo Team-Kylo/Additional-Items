@@ -1,22 +1,20 @@
 /*
-Generates fake data for 10 sellers with 10 items each.  Can be modified on line 41 to adjust these numbers.
+Generates fake data for 10 sellers with 10 items each.  Can be modified on line 41 to adjust.
 */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const faker = require('faker');
-const Schemas = require('../database/Schemas.js');
 const db = require('../database');
 
 const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
-
-  let arrayOfFakeData = [];
+  const arrayOfFakeData = [];
   let k = 1;
   // needs to start at 10 for the url for the pictures to take up 2 slots
   let i = 10;
 
   // create a while loop for the seller
-  while ( i < numOfSellers + 10 ) {
-
+  while (i < numOfSellers + 10) {
     // get fake data for seller
-    let generatedSellerInfo = {
+    const generatedSellerInfo = {
       sellerName: faker.internet.userName(),
       sellerCountry: faker.address.country(),
       sellerTotalSales: Math.floor(Math.random() * 500),
@@ -28,16 +26,16 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
     let j = 10;
 
     // while loop for the items
-    while( j < numOfItemsPerSeller + 10) {
-      let generatedItemInfo ={};
+    while (j < numOfItemsPerSeller + 10) {
+      const generatedItemInfo = {};
 
       // makes a copy of the seller as to not reference the same obj in memory
-      for (let key in generatedSellerInfo) {
-        generatedItemInfo[key] = generatedSellerInfo[key];
-      }
+      Object.entries(generatedSellerInfo).forEach(([key, value]) => {
+        generatedItemInfo[key] = value;
+      });
 
       // data for individual items
-      generatedItemInfo.itemId =  k;
+      generatedItemInfo.itemId = k;
       generatedItemInfo.itemName = faker.commerce.productName();
       generatedItemInfo.itemPrice = faker.commerce.price();
       generatedItemInfo.itemPicture = `https://i.picsum.photos/id/5${j}/300/3${i}.jpg`;
@@ -45,24 +43,24 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
 
       arrayOfFakeData.push(generatedItemInfo);
 
-      j++;
-      k++;
+      j += 1;
+      k += 1;
     }
 
-    i++;
-  };
+    i += 1;
+  }
 
-  db.addManyItems(arrayOfFakeData).
-    then(() => {
-      console.log('Seeding was successful to the Kylo Database with Items Documents!')
+  db.addManyItems(arrayOfFakeData)
+    .then(() => {
+      console.log('Seeding was successful to the Kylo Database with Items Documents!');
       // exits the node process
       process.exit();
-    }).
-    catch((error) => {
+    })
+    .catch((error) => {
       // console logs the error then excess the node process
       console.error('Seeding the data had the following error:', error);
       process.exit();
-    })
+    });
 };
 
 databaseSeeder();

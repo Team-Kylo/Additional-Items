@@ -1,12 +1,12 @@
-module.exports = {
+{
   "parser": "babel-eslint",
   "env": {
       "browser": true,
       "node": true
   },
   "extends": "airbnb",
-  "ignorePatterns": ["bundle.js", "node_modules"],
+  "ignorePatterns": ["bundle.js"],
   "rules": {
-    "no-console": "off",
+    "no-console": "off"
   }
 }
