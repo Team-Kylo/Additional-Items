@@ -13,7 +13,6 @@ app.get('/:id', (req, res) => {
   // need to sanitize this at some point
   db.getAllSellerItemsExceptCurrentItem(req.params.id).
     then((allItems) => {
-      console.log(allItems);
       res.status(200).json(allItems);
     }).
     catch((error) => {

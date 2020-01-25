@@ -50,7 +50,6 @@ module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => {
           }
           i++;
         };
-        console.log(allSellerItems);
         return allSellerItems;
       })
   )
