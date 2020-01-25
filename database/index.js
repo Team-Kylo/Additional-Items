@@ -41,16 +41,8 @@ module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => {
       }).
       then((allSellerItems) => {
         // removing the original item from the returned array
-        let foundFlag = false;
-        let i = 0;
-        while (!foundFlag) {
-          if(allSellerItems[i].itemId == idOfItem) {
-            allSellerItems.splice(i, 1);
-            foundFlag = true;
-          }
-          i++;
-        };
-        return allSellerItems;
+        let filteredSellerItems = allSellerItems.filter((item) => ( item.itemId !== Number(idOfItem) ));
+        return filteredSellerItems;
       })
   )
 }
