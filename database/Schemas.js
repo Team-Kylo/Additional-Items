@@ -11,6 +11,6 @@ const itemSchema = new mongoose.Schema({
   sellerCountry: String,
   sellerTotalSales: Number,
   sellerJoinDate: Date,
-})
+});
 
 module.exports.Item = mongoose.model('Item', itemSchema);
