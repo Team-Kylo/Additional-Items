@@ -50,17 +50,21 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
     i += 1;
   }
 
-  db.addManyItems(arrayOfFakeData)
-    .then(() => {
-      console.log('Seeding was successful to the Kylo Database with Items Documents!');
-      // exits the node process
-      process.exit();
-    })
-    .catch((error) => {
-      // console logs the error then excess the node process
-      console.error('Seeding the data had the following error:', error);
-      process.exit();
-    });
+  return arrayOfFakeData;
 };
 
-databaseSeeder();
+const fakeData = databaseSeeder();
+
+db.addManyItems(fakeData)
+  .then(() => {
+    console.log('Seeding was successful to the Kylo Database with Items Documents!');
+    // exits the node process
+    process.exit();
+  })
+  .catch((error) => {
+    // console logs the error then excess the node process
+    console.error('Seeding the data had the following error:', error);
+    process.exit();
+  });
+
+module.exports.databaseSeeder = databaseSeeder;
