@@ -1,4 +1,4 @@
-// should test that the db functions can write, read, and pull out the proper information.
+// tests that the schema is working properly
 const mongoose = require('mongoose');
 const {Item} = require('../database/Schemas');
 const itemData = {
@@ -31,11 +31,11 @@ describe('Item Model Test', () => {
     process.exit();
   });
 
-  it('should create & save user successfully', async () => {
+  it('should create & save an item successfully', async () => {
     const validItem = new Item(itemData);
     const savedItem = await validItem.save();
-    // Object Id should be defined when successfully saved to MongoDB.
-    expect(savedItem.itemId).toBeDefined();
+    expect(savedItem._id).toBeDefined();
+    expect(savedItem.itemId).toBe(itemData.itemId);
     expect(savedItem.itemName).toBe(itemData.itemName);
     expect(savedItem.itemPrice).toBe(itemData.itemPrice);
     expect(savedItem.itemPicture).toBe(itemData.itemPicture);
@@ -53,4 +53,7 @@ describe('Item Model Test', () => {
     expect(savedInvalidItem.itemId).toBe(invalidItem.itemId);
     expect(savedInvalidItem.itemLocation).toBeUndefined();
   });
+  // additional tests could include:
+  // making all fields required
+  // value types are matching, String = a string
 });
