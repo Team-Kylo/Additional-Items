@@ -26,7 +26,12 @@ describe('Item Model Test', () => {
       });
   });
 
-  it('create & save user successfully', async () => {
+  afterAll(async () => {
+    await connection.close();
+    process.exit();
+  });
+
+  it('should create & save user successfully', async () => {
     const validItem = new Item(itemData);
     const savedItem = await validItem.save();
     // Object Id should be defined when successfully saved to MongoDB.
@@ -35,5 +40,17 @@ describe('Item Model Test', () => {
     expect(savedItem.itemPrice).toBe(itemData.itemPrice);
     expect(savedItem.itemPicture).toBe(itemData.itemPicture);
     expect(savedItem.itemShippingPrice).toBe(itemData.itemShippingPrice);
+    expect(savedItem.sellerPicture).toBe(itemData.sellerPicture);
+    expect(savedItem.sellerName).toBe(itemData.sellerName);
+    expect(savedItem.sellerCountry).toBe(itemData.sellerCountry);
+    expect(savedItem.sellerTotalSales).toBe(itemData.sellerTotalSales);
+    expect(savedItem.sellerJoinDate).toBe(itemData.sellerJoinDate);
+  });
+
+  it('should not insert an invalid field', async () => {
+    const invalidItem = new Item({itemId: 2, itemLocation: 'UnitedStates'});
+    const savedInvalidItem = await invalidItem.save();
+    expect(savedInvalidItem.itemId).toBe(invalidItem.itemId);
+    expect(savedInvalidItem.itemLocation).toBeUndefined();
   });
 });
