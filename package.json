@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
-    "generate": "node ./dummyData/dataSeeder",
+    "seed": "node ./dummyData/seeder",
     "dev:build": "webpack --watch",
     "build": "webpack",
     "dev:start": "nodemon -i src -i public -i npm_modules -i __tests__ server",

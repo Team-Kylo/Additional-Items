@@ -1,20 +1,8 @@
 // tests that the database functions are writing and reading properly
-const { addNewItem, getAllSellerItemsExceptCurrentItem, addManyItems, findOne} = require('../database/index');
+const { getAllSellerItemsExceptCurrentItem, addManyItems } = require('../database/index');
 const mongoose = require('mongoose');
-const { seeder } = require('../dummyData/dataSeeder');
+const { databaseSeeder } = require('../dummyData/dataSeeder');
 
-const itemData = {
-  itemId: 1,
-  itemName: 'Kylo Lightsaber',
-  itemPrice: 999.00,
-  itemPicture: 'urlToItemPicture',
-  itemShippingPrice: 50.00,
-  sellerPicture: 'urlToSellerPicture',
-  sellerName: 'Kylo-ren',
-  sellerCountry: 'United States',
-  sellerTotalSales: 400,
-  sellerJoinDate: new Date(),
-};
 
 describe('', () => {
 
@@ -28,13 +16,10 @@ describe('', () => {
       });
   });
 
-  it('should create & save an item successfully', async () => {
-    const insertedItem = await addNewItem(itemData);
-    const retrievedItem = await findOne(insertedItem.itemId);
-    const seededDB = await seeder();
+  it('data generation should create 100 items', async () => {
+    const generatedItems = databaseSeeder();
 
-    expect(retrievedItem.itemId).toBe(itemData.itemId);
-
+    expect(generatedItems.length).toBe(100);
   });
 
   // additional tests could include:
