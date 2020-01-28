@@ -1,5 +1,5 @@
 const { db } = require('./db');
-const { Item } = require('./Schemas.js');
+const { Item } = require('./schemas.js');
 
 // error handling or notification when the database connects
 db.on('error', console.error.bind(console, 'connection error:'));
