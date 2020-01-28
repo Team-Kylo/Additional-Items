@@ -1,6 +1,7 @@
 // tests that the schema is working properly
 const mongoose = require('mongoose');
-const {Item} = require('../database/Schemas');
+const { Item } = require('../database/schemas');
+
 const itemData = {
   itemId: 1,
   itemName: 'Kylo Lightsaber',
@@ -26,11 +27,6 @@ describe('Item Model Test', () => {
       });
   });
 
-  afterAll(async () => {
-    await connection.close();
-    process.exit();
-  });
-
   it('should create & save an item successfully', async () => {
     const validItem = new Item(itemData);
     const savedItem = await validItem.save();
@@ -48,11 +44,12 @@ describe('Item Model Test', () => {
   });
 
   it('should not insert an invalid field', async () => {
-    const invalidItem = new Item({itemId: 2, itemLocation: 'UnitedStates'});
+    const invalidItem = new Item({ itemId: 2, itemLocation: 'UnitedStates' });
     const savedInvalidItem = await invalidItem.save();
     expect(savedInvalidItem.itemId).toBe(invalidItem.itemId);
     expect(savedInvalidItem.itemLocation).toBeUndefined();
   });
+
   // additional tests could include:
   // making all fields required
   // value types are matching, String = a string

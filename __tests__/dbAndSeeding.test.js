@@ -1,10 +1,10 @@
 // tests that the database functions are writing and reading properly
-const { getAllSellerItemsExceptCurrentItem, addManyItems } = require('../database/index');
 const mongoose = require('mongoose');
+const { getAllSellerItemsExceptCurrentItem, addManyItems } = require('../database/index');
 const { generateData } = require('../dummyData/dataSeeder');
 
 
-describe('', () => {
+describe('Database Seeding and Querying', () => {
 
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL,
@@ -21,7 +21,7 @@ describe('', () => {
   const generatedItems = generateData(numberOfSellers, numberOfItems);
 
   it('should generate 100 items by default', async () => {
-    let tempData = generateData();
+    const tempData = generateData();
     expect(tempData.length).toBe(100);
   });
 
@@ -32,7 +32,7 @@ describe('', () => {
   it(`should generate ${numberOfItems} unique items for ${numberOfSellers} sellers`, async () => {
     let countOfItemsPerSeller = 0;
     let arrayOfUniqueItems = [];
-    let sellerName = generatedItems[0].sellerName;
+    let { sellerName } = generatedItems[0];
     let generatedSellerCount = 1;
 
     for (let i = 0; i < generatedItems.length; i++) {
@@ -53,13 +53,13 @@ describe('', () => {
 
   // inserting data into the db.
   it('should insert the generated data into the database', async () => {
-    let insertedItems = await addManyItems(generatedItems)
+    const insertedItems = await addManyItems(generatedItems)
     expect(insertedItems.length).toBe(generatedItems.length);
   });
 
   it('should return all the items by a seller except the current item', async () => {
-    let allExceptCurrent = await getAllSellerItemsExceptCurrentItem(1);
-    let arrayOfItemIds = allExceptCurrent.map((item) => (item.itemId));
+    const allExceptCurrent = await getAllSellerItemsExceptCurrentItem(1);
+    const arrayOfItemIds = allExceptCurrent.map((item) => (item.itemId));
     expect(arrayOfItemIds).not.toContain(1);
-  })
+  });
 });
