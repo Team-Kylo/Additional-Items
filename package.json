@@ -27,6 +27,7 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.8.9",
     "react": "^16.12.0",
@@ -34,7 +35,12 @@
     "webpack": "^4.41.5"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.0",
     "faker": "^4.1.0",
     "nodemon": "^2.0.2",
     "webpack-cli": "^3.3.10"
