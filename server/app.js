@@ -12,8 +12,8 @@ app.get('/:id', (req, res) => {
     .then((allItems) => {
       res.status(200).json(allItems);
     })
-    .catch((error) => {
-      res.status(500).json(error);
+    .catch(() => {
+      res.status(404).json({ error: 'invalid input!' });
     });
 });
 
