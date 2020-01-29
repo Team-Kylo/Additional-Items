@@ -1,10 +1,8 @@
 /node_modules
 /.env
 /public/bundle.js
-/coverage
-/.babelrc
-/.eslintrc.js
+coverage
 enzyme.config.js
+.babelrc
+jest.config.js
 jest-mongodb-config.js
-package-lock.json
-webpack.config.js
