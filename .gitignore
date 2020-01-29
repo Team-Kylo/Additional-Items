@@ -2,7 +2,4 @@
 /.env
 /public/bundle.js
 coverage
-enzyme.config.js
-.babelrc
-jest.config.js
-jest-mongodb-config.js
+package-lock.json
