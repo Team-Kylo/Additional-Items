@@ -5,7 +5,7 @@ module.exports = {
       "node": true
   },
   "extends": "airbnb",
-  "ignorePatterns": ["bundle.js"],
+  "ignorePatterns": ["bundle.js", "*.test.js"],
   "rules": {
     "no-console": "off"
   }

@@ -1,42 +1,14 @@
-require('dotenv').config();
-// mongoose set up and connection
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true })
-  .catch((error) => {
-    console.error(error);
-  });
-const db = mongoose.connection;
+const { db } = require('./db');
+const { Item } = require('./schemas.js');
 
 // error handling or notification when the database connects
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('Connected to the db'));
 
-// schema for item
-const Schemas = require('./Schemas.js');
-
-
-module.exports.addNewItem = (newItem) => {
-  const itemToBeAdded = new Schemas.Item({
-    itemId: newItem.itemId,
-    itemName: newItem.itemName,
-    itemPrice: newItem.itemPrice,
-    itemPicture: newItem.itemPicture,
-    itemShippingPrice: newItem.itemShippingPrice,
-    sellerPicture: newItem.sellerPicture,
-    sellerName: newItem.sellerName,
-    sellerCountry: newItem.sellerCountry,
-    sellerTotalSales: newItem.sellerTotalSales,
-    sellerJoinDate: newItem.sellerJoinDate,
-  });
-
-  return itemToBeAdded.save();
-};
-
 module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => (
-  Schemas.Item.find({ itemId: idOfItem })
+  Item.find({ itemId: idOfItem })
     .then((itemInformation) => (
-      Schemas.Item.find({ sellerName: itemInformation[0].sellerName })
+      Item.find({ sellerName: itemInformation[0].sellerName })
     ))
     .then((allSellerItems) => {
       // removing the original item from the returned array
@@ -48,5 +20,5 @@ module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => (
 );
 
 module.exports.addManyItems = (arrayOfItems) => (
-  Schemas.Item.insertMany(arrayOfItems)
+  Item.insertMany(arrayOfItems)
 );

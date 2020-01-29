@@ -3,9 +3,8 @@ Generates fake data for 10 sellers with 10 items each.  Can be modified on line 
 */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const faker = require('faker');
-const db = require('../database');
 
-const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
+const generateData = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
   const arrayOfFakeData = [];
   let k = 1;
   // needs to start at 10 for the url for the pictures to take up 2 slots
@@ -50,17 +49,10 @@ const databaseSeeder = (numOfSellers = 10, numOfItemsPerSeller = 10) => {
     i += 1;
   }
 
-  db.addManyItems(arrayOfFakeData)
-    .then(() => {
-      console.log('Seeding was successful to the Kylo Database with Items Documents!');
-      // exits the node process
-      process.exit();
-    })
-    .catch((error) => {
-      // console logs the error then excess the node process
-      console.error('Seeding the data had the following error:', error);
-      process.exit();
-    });
+  return arrayOfFakeData;
 };
 
-databaseSeeder();
+
+module.exports = {
+  generateData,
+};
