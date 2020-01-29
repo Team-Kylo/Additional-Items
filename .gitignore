@@ -1,4 +1,10 @@
 /node_modules
 /.env
 /public/bundle.js
-coverage
+/coverage
+/.babelrc
+/.eslintrc.js
+enzyme.config.js
+jest-mongodb-config.js
+package-lock.json
+webpack.config.js
