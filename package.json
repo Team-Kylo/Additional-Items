@@ -4,7 +4,7 @@
   "description": "This will be the component that renders the additional items for sale from the seller.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --detectOpenHandles --colors --forceExit",
+    "test": "jest --coverage --detectOpenHandles --colors --reporters=jest-junit",
     "seed": "node ./dummyData/seeder",
     "dev:build": "webpack --watch",
     "build": "webpack",
