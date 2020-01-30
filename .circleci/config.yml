@@ -21,9 +21,6 @@ jobs: # a collection of steps
           paths:
             - ./node_modules
       - run:
-          name: "JavaScript Linter"
-          command: npm lint -- --format junit -o reports/junit/js-lint-results.xml
-      - run:
           name: "JavaScript Test Suite"
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
