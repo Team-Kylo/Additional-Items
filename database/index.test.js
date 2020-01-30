@@ -22,14 +22,14 @@ describe('Database Methods', () => {
   });
 
   it('should return all items except the one given', async () => {
-    const insertedItems = await addManyItems(testData);
 
     const returnedItems = await getAllSellerItemsExceptCurrentItem(1);
     const idArray = returnedItems.map((item) => item.itemId);
-    expect(idArray).not.toContain(1);
 
     const returnedItems2 = await getAllSellerItemsExceptCurrentItem(4);
     const idArray2 = returnedItems2.map((item) => item.itemId);
+
+    expect(idArray).not.toContain(1);
     expect(idArray2).not.toContain(4);
   });
 });
