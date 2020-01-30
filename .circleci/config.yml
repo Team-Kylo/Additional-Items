@@ -23,7 +23,7 @@ jobs: # a collection of steps
       - run:
           name: "JavaScript Test Suite"
           environment:
-            # JEST_JUNIT_OUTPUT: ~/.circleci/reports/js-test-results.xml
+            JEST_JUNIT_OUTPUT: ./test-results/junit/results.xml
           command:  |
             mkdir -p ./test-results/junit
             npm test --ci --reporters=jest-junit
