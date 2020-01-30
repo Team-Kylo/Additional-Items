@@ -23,9 +23,9 @@ jobs: # a collection of steps
       - run:
           name: "JavaScript Test Suite"
           environment:
-            JEST_JUNIT_OUTPUT: .circleci/js-test-results.xml
+            JEST_JUNIT_OUTPUT: .circleci/reports/js-test-results.xml
           command: npm test -- --ci --reporters=default --reporters=jest-junit --forceExit
       - store_test_results:
-          path: reports/junit
+          path: reports
       - store_artifacts:
-          path: reports/junit
+          path: reports
