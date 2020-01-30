@@ -4,6 +4,8 @@ const { testData } = require('../dummyData/testData')
 
 describe('Database Methods', () => {
 
+  let insertedItems;
+
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL,
       { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
@@ -12,12 +14,16 @@ describe('Database Methods', () => {
           process.exit(1);
         }
       });
+
+      insertedItems = await addManyItems(testData);
   });
 
-
+  afterAll(() => {
+    mongoose.connection.close();
+    console.log('connection closed');
+  })
 
   it('save many items at once', async () => {
-    const insertedItems = await addManyItems(testData);
     expect(insertedItems.length).toBe(testData.length);
   });
 

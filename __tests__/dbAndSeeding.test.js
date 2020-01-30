@@ -6,6 +6,10 @@ const { generateData } = require('../dummyData/dataSeeder');
 
 describe('Database Seeding and Querying', () => {
 
+  const numberOfSellers = 10;
+  const numberOfItems = 10;
+  let generatedItems;
+
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL,
       { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
@@ -14,11 +18,13 @@ describe('Database Seeding and Querying', () => {
           process.exit(1);
         }
       });
+
+    generatedItems = await generateData(numberOfSellers, numberOfItems);
   });
 
-  const numberOfSellers = 8;
-  const numberOfItems = 8;
-  const generatedItems = generateData(numberOfSellers, numberOfItems);
+  afterAll(async () => {
+    await mongoose.connection.close();
+  });
 
   it('should generate 100 items by default', async () => {
     const tempData = generateData();

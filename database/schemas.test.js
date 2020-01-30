@@ -14,6 +14,7 @@ const itemData = {
   sellerTotalSales: 400,
   sellerJoinDate: new Date(),
 };
+let validItem;
 
 describe('Item Model Test', () => {
 
@@ -25,10 +26,15 @@ describe('Item Model Test', () => {
           process.exit(1);
         }
       });
+      validItem = new Item(itemData);
   });
 
+  afterAll(() => {
+    mongoose.connection.close();
+    console.log('connection closed');
+  })
+
   it('should create & save an item successfully', async () => {
-    const validItem = new Item(itemData);
     const savedItem = await validItem.save();
     expect(savedItem._id).toBeDefined();
     expect(savedItem.itemId).toBe(itemData.itemId);

@@ -4,15 +4,13 @@
   "description": "This will be the component that renders the additional items for sale from the seller.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
+    "circle:test": "jest",
     "seed": "node ./dummyData/seeder",
     "dev:build": "webpack --watch",
     "build": "webpack",
     "dev:start": "nodemon -i src -i public -i npm_modules -i __tests__ server",
     "start": "node server"
-  },
-  "jest-junit": {
-    "output": "./test-results/junit/results.xml"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,5 @@
-const { db } = require('./db');
+// const { db } = require('./db');
 const { Item } = require('./schemas.js');
-
-// error handling or notification when the database connects
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log('Connected to the db'));
 
 module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => (
   Item.find({ itemId: idOfItem })
@@ -15,6 +11,7 @@ module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => (
       const filteredSellerItems = allSellerItems.filter((item) => (
         item.itemId !== Number(idOfItem)
       ));
+      // console.log(filteredSellerItems);
       return filteredSellerItems;
     })
 );
