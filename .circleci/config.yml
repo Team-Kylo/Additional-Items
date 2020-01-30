@@ -20,11 +20,10 @@ jobs: # a collection of steps
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
       - run:
           name: "JavaScript Test Suite"
           environment:
-          JEST_JUNIT_OUTPUT: ~/.circleci/reports/js-test-results.xml
+          # JEST_JUNIT_OUTPUT: ~/.circleci/reports/js-test-results.xml
           command:  |
             mkdir -p ./test-results/junit
             npm test
