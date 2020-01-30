@@ -20,7 +20,7 @@ jobs: # a collection of steps
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-       - run:
+      - run:
           name: Run tests with JUnit as reporter
           command: npm test --runInBand --reporters=default --reporters=jest-junit
           environment:
