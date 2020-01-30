@@ -11,7 +11,7 @@
     "dev:start": "nodemon -i src -i public -i npm_modules -i __tests__ server",
     "start": "node server"
   },
-  "jest-junit":{
+  "jest-junit": {
     "output": "./test-results/junit/results.xml"
   },
   "repository": {
