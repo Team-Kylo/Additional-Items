@@ -14,13 +14,16 @@ describe('Database Methods', () => {
       });
   });
 
-  const insertedItems = await addManyItems(testData);
+
 
   it('save many items at once', async () => {
+    const insertedItems = await addManyItems(testData);
     expect(insertedItems.length).toBe(testData.length);
   });
 
   it('should return all items except the one given', async () => {
+    const insertedItems = await addManyItems(testData);
+
     const returnedItems = await getAllSellerItemsExceptCurrentItem(1);
     const idArray = returnedItems.map((item) => item.itemId);
     expect(idArray).not.toContain(1);
