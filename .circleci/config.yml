@@ -13,19 +13,17 @@ jobs: # a collection of steps
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: v1-dependencies-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: install-npm
           command: npm install
       - save_cache: # special step to save the dependency cache
           key: v1-dependencies-{{ checksum "package-lock.json" }}
           paths:
-            - ./node_modules
+            - /.circleci
       - run:
           name: "JavaScript Test Suite"
           environment:
-            JEST_JUNIT_OUTPUT: .circleci/reports/js-test-results.xml
+            JEST_JUNIT_OUTPUT: ~/.circleci/reports/js-test-results.xml
           command: npm test -- --ci --reporters=default --reporters=jest-junit --forceExit
       - store_test_results:
           path: ~/.circleci/reports
