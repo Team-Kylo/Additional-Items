@@ -23,7 +23,7 @@ jobs: # a collection of steps
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Seed database
-          command: npm seed
+          command: npm run seed
       - run:
           name: Run tests with JUnit as reporter
           command: npm jest --runInBand --reporters=default --reporters=jest-junit
