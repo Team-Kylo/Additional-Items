@@ -19,7 +19,7 @@ jobs: # a collection of steps
       - save_cache: # special step to save the dependency cache
           key: v1-deps-{{ checksum "package-lock.json" }}
           paths:
-            - ~/.circleci/mern-starter/package-lock.json
+            - node_modules
       - run:
           name: "JavaScript Test Suite"
           environment:
