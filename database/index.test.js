@@ -14,8 +14,9 @@ describe('Database Methods', () => {
       });
   });
 
+  const insertedItems = await addManyItems(testData);
+
   it('save many items at once', async () => {
-    const insertedItems = await addManyItems(testData);
     expect(insertedItems.length).toBe(testData.length);
   });
 
