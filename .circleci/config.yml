@@ -1,7 +1,7 @@
 version: 2.1 # use CircleCI 2.1
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/mern-starter # directory where steps will run
+    working_directory: ~/kylo # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node:10.18.0 # ...with this image as the primary container; this is where all `steps` will run
       - image: mongo:4.0.2 # and this image as the secondary service container
@@ -12,14 +12,14 @@ jobs: # a collection of steps
           command: 'sudo npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          keys: v1-deps-{{ checksum "package.json" }}
+          keys: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: install-npm
           command: npm install
       - save_cache: # special step to save the dependency cache
           paths:
             - node_modules
-          key: v1-deps-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: "JavaScript Test Suite"
