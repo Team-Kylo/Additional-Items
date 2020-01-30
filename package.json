@@ -11,6 +11,9 @@
     "dev:start": "nodemon -i src -i public -i npm_modules -i __tests__ server",
     "start": "node server"
   },
+  "jest-junit":{
+    "output": "./test-results/junit/results.xml"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Team-Kylo/Additional-Items.git"
