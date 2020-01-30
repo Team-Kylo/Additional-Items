@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undef */
 // tests that the database functions are writing and reading properly
 const mongoose = require('mongoose');
 const { getAllSellerItemsExceptCurrentItem, addManyItems } = require('../database/index');
@@ -5,6 +7,9 @@ const { generateData } = require('../dummyData/dataSeeder');
 
 
 describe('Database Seeding and Querying', () => {
+  const numberOfSellers = 10;
+  const numberOfItems = 10;
+  let generatedItems;
 
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL,
@@ -14,11 +19,13 @@ describe('Database Seeding and Querying', () => {
           process.exit(1);
         }
       });
+
+    generatedItems = await generateData(numberOfSellers, numberOfItems);
   });
 
-  const numberOfSellers = 8;
-  const numberOfItems = 8;
-  const generatedItems = generateData(numberOfSellers, numberOfItems);
+  afterAll(async () => {
+    await mongoose.connection.close();
+  });
 
   it('should generate 100 items by default', async () => {
     const tempData = generateData();
@@ -53,7 +60,7 @@ describe('Database Seeding and Querying', () => {
 
   // inserting data into the db.
   it('should insert the generated data into the database', async () => {
-    const insertedItems = await addManyItems(generatedItems)
+    const insertedItems = await addManyItems(generatedItems);
     expect(insertedItems.length).toBe(generatedItems.length);
   });
 

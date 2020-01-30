@@ -3,3 +3,4 @@
 /public/bundle.js
 coverage
 package-lock.json
+junit.xml

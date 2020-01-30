@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
 // tests that the schema is working properly
 const mongoose = require('mongoose');
 const { Item } = require('../database/schemas');
@@ -14,9 +16,9 @@ const itemData = {
   sellerTotalSales: 400,
   sellerJoinDate: new Date(),
 };
+let validItem;
 
 describe('Item Model Test', () => {
-
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URL,
       { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
@@ -25,10 +27,15 @@ describe('Item Model Test', () => {
           process.exit(1);
         }
       });
+    validItem = new Item(itemData);
+  });
+
+  afterAll(() => {
+    mongoose.connection.close();
+    console.log('connection closed');
   });
 
   it('should create & save an item successfully', async () => {
-    const validItem = new Item(itemData);
     const savedItem = await validItem.save();
     expect(savedItem._id).toBeDefined();
     expect(savedItem.itemId).toBe(itemData.itemId);
