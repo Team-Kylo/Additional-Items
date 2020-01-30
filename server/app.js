@@ -13,7 +13,7 @@ app.get('/:id', (req, res) => {
       res.status(200).json(allItems);
     })
     .catch((error) => {
-      res.status(500).json(error);
+      res.status(404).json(error);
     });
 });
 

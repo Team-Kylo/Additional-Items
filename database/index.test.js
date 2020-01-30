@@ -21,15 +21,15 @@ describe('Database Methods', () => {
     expect(insertedItems.length).toBe(testData.length);
   });
 
-  // it('should return all items except the one given', async () => {
+  it('should return all items except the one given', async () => {
 
-  //   const returnedItems = await getAllSellerItemsExceptCurrentItem(1);
-  //   const idArray = returnedItems.map((item) => item.itemId);
+    const returnedItems = await getAllSellerItemsExceptCurrentItem(1);
+    const idArray = returnedItems.map((item) => item.itemId);
 
-  //   const returnedItems2 = await getAllSellerItemsExceptCurrentItem(4);
-  //   const idArray2 = returnedItems2.map((item) => item.itemId);
+    const returnedItems2 = await getAllSellerItemsExceptCurrentItem(4);
+    const idArray2 = returnedItems2.map((item) => item.itemId);
 
-  //   expect(idArray).not.toContain(1);
-  //   expect(idArray2).not.toContain(4);
-  // });
+    expect(idArray).not.toContain(1);
+    expect(idArray2).not.toContain(4);
+  });
 });

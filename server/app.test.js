@@ -19,6 +19,6 @@ describe('API endpoint with /:id', () => {
   it('should return with a 500 error if something went wrong', async () => {
     await endpoint
       .get('/Foobar')
-      .expect(500);
+      .expect(404);
   });
 });
