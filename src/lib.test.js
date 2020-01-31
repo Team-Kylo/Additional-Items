@@ -28,9 +28,24 @@ describe('fetching data from the server API', () => {
     expect(additionalItems).toEqual(allButThree);
   });
 
-  // it('should handle recieving an error', async () => {
-  //   fetchMock.mock('/foo', {
-  //     body: {}
-  //   });
-  // });
+  it('should handle recieving an error for invalid input', async () => {
+    fetchMock.mock('/foo', {
+      body: JSON.stringify({
+        error: 'Invalid input type',
+      }),
+      status: 404,
+    });
+    const fooError = await getAdditionalItems('foo');
+    console.log(fooError);
+    expect(fooError.error).toEqual('Invalid input type');
+  });
+
+  it('should handle recieving nothing in the body', async () => {
+    fetchMock.mock('/10000', {
+      body: JSON.stringify({ error: 'That ID does not exist in the database' }),
+      status: 200,
+    });
+    const blankFoo = await getAdditionalItems(10000);
+    expect(blankFoo.error).toEqual('That ID does not exist in the database');
+  });
 });
