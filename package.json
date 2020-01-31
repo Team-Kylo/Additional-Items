@@ -48,6 +48,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.0",
     "faker": "^4.1.0",
+    "fetch-mock": "^9.0.0-beta.2",
     "jest": "^25.1.0",
     "jest-junit": "^10.0.0",
     "nodemon": "^2.0.2",
