@@ -7,6 +7,7 @@
 import fetchMock from 'fetch-mock';
 import 'isomorphic-fetch';
 import { getAdditionalItems } from './lib';
+import { testData } from '../dummyData/testData';
 
 // eslint-disable-next-line no-undef
 describe('fetching data from the server API', () => {
@@ -14,13 +15,22 @@ describe('fetching data from the server API', () => {
     fetchMock.reset();
   });
 
-  it('should get the remaining items that the seller has for sale', async () => {
+  it('should recieve a JSON response and return CommonJS', async () => {
+    // console.log(testData);
+    const allButThree = testData.filter((item) => item.itemId !== 3);
+
     fetchMock.mock('/3', {
-      body: { name: 'date' },
+      body: JSON.stringify(allButThree),
       status: 200,
     });
 
     const additionalItems = await getAdditionalItems(3);
-    expect(additionalItems).toEqual({ name: 'date' });
+    expect(additionalItems).toEqual(allButThree);
   });
+
+  // it('should handle recieving an error', async () => {
+  //   fetchMock.mock('/foo', {
+  //     body: {}
+  //   });
+  // });
 });
