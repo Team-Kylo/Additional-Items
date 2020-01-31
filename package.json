@@ -4,7 +4,7 @@
   "description": "This will be the component that renders the additional items for sale from the seller.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand --coverage",
+    "test": "jest --runInBand --coverage --forceExit",
     "circle:test": "jest",
     "seed": "node ./dummyData/seeder",
     "dev:build": "webpack --watch",
