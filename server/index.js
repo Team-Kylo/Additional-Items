@@ -24,6 +24,6 @@ app.get('/:id', (req, res) => {
   }
 });
 
-const port = process.env.ADDITIONAL_ITEMS_PORT;
+const port = process.env.ADDITIONAL_ITEMS_PORT || 3004;
 
 module.exports = app.listen(port, console.log(`Listening on port ${port}`));
