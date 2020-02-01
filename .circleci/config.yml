@@ -22,8 +22,11 @@ jobs: # a collection of steps
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
+          name: Seeding the db
+          command: npm run seed
+      - run:
           name: Run tests with JUnit as reporter
-          command: npm run circle:test --runInBand --reporters=default --reporters=jest-junit
+          command: npm run circle:test --runInBand --coverage --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: "reports/junit"
       - store_test_results:

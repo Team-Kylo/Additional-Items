@@ -36,9 +36,16 @@ describe('API endpoint with /:id', () => {
       });
   });
 
-  it('should return with a 404 error if something went wrong', (done) => {
+  it('should return with a 400 error if sent an invalid input', (done) => {
     endpoint
       .get('/Foobar')
+      .expect(400)
+      .end(done);
+  });
+
+  it('should return with a 404 error if the ID is not in the database', (done) => {
+    endpoint
+      .get('/100000')
       .expect(404)
       .end(done);
   });

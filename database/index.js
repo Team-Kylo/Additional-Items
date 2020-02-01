@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 const { Item } = require('./schemas.js');
+const db = require('./db');
 
 module.exports.getAllSellerItemsExceptCurrentItem = (idOfItem) => (
   Item.find({ itemId: idOfItem })
