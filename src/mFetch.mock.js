@@ -4,9 +4,9 @@ import fetchMock from 'fetch-mock';
 import 'isomorphic-fetch';
 import { testData } from '../dummyData/testData';
 
-const allButThree = testData.filter((item) => item.itemId !== 3);
+const allButOne = testData.filter((item) => item.itemId !== 1);
 
-module.exports.testData = allButThree;
+module.exports.testData = allButOne;
 
 module.exports.invalidFetch = () => {
   fetchMock.mock('/foo', {
@@ -25,8 +25,8 @@ module.exports.notFoundFetch = () => {
 };
 
 module.exports.properFetch = () => {
-  fetchMock.mock('/3', {
-    body: JSON.stringify(allButThree),
+  fetchMock.mock('/1', {
+    body: JSON.stringify(allButOne),
     status: 200,
   });
 };
