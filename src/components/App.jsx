@@ -1,11 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getAdditionalItems } from '../lib';
 
-const App = ({ itemId }) => (
-  <div className="container">
-    {itemId}
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allItems: [],
+    };
+  }
+
+  componentDidMount() {
+    const { itemId } = this.props;
+    getAdditionalItems(itemId)
+      .then((allAdditionalItems) => {
+        console.log(allAdditionalItems);
+      });
+  }
+
+  render() {
+    const { allItems } = this.state;
+    return (
+      <div className="container">
+        {allItems}
+      </div>
+    );
+  }
+}
 
 
 App.defaultProps = {
