@@ -3,27 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { getAdditionalItems } from '../lib';
 import Seller from './Seller';
+import ItemContainer from './ItemContainer';
 
 const Container = styled.div`
   padding: 0px 18px 0px 18px;
-
-  border-bottom: 1px solid #E1E3DF;
+  justify-content: center;
 `;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allItems: [{
-        sellerName: '',
-        // sellerStarRating: 0,
-        // sellerReviewCount: 0,
-        sellerCountry: '',
-        sellerTotalSales: 0,
-        sellerPicture: '',
-        sellerJoinDate: '',
-      }],
+      sellerInfo: {},
+      allItems: [],
+      itemsToDisplayIndex: 0,
     };
+    this.onArrowClickCallback = this.onArrowClickCallback.bind(this);
   }
 
   componentDidMount() {
@@ -31,26 +26,31 @@ class App extends React.Component {
     getAdditionalItems(itemId)
       .then((allAdditionalItems) => {
         this.setState({
+          sellerInfo: allAdditionalItems[0],
           allItems: allAdditionalItems,
         });
       })
       .catch((error) => console.error(error));
   }
 
+  // will need a callback that takes +1 or -1 so that the images can scroll
+  onArrowClickCallback(value) {
+    const { itemsToDisplayIndex } = this.state;
+    this.setState({
+      itemsToDisplayIndex: itemsToDisplayIndex + value,
+    });
+  }
+
   render() {
-    const { allItems } = this.state;
+    const { allItems, sellerInfo, itemsToDisplayIndex } = this.state;
     return (
       <Container className="container">
-        <Seller
-          sellerName={allItems[0].sellerName}
-          // sellerStarRating={allItems[0].sellerStarRating}
-          // sellerReviewCount={allItems[0].sellerName}
-          sellerCountry={allItems[0].sellerCountry}
-          sellerTotalSales={allItems[0].sellerTotalSales}
-          sellerJoinDate={allItems[0].sellerJoinDate}
-          sellerPicture={allItems[0].sellerPicture}
+        <Seller aboutSeller={sellerInfo} />
+        <ItemContainer
+          onArrowClickCallback={this.onArrowClickCallback}
+          // splice(starting index, how many to delete)
+          allItems={[...allItems].splice(itemsToDisplayIndex, 5)}
         />
-        Additional Items
       </Container>
     );
   }
