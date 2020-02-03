@@ -30,14 +30,14 @@ const Seller = ({ aboutSeller }) => {
   const SellerContainer = styled.div`
     padding: 12px 0px 0px 12px;
     line-height: 1.4;
-    display:flex;
+    display: flex;
     flex-direction: column;
     font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
   `;
 
   const SellerInfoTop = styled.div`
     padding: 6px 4px 0px 2px;
-    display:flex;
+    display: flex;
     flex-direction: row;
   `;
 
