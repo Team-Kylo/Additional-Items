@@ -1,29 +1,26 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { getAdditionalItems } from '../lib';
 import Seller from './Seller';
+import ItemContainer from './ItemContainer';
 
 const Container = styled.div`
   padding: 0px 18px 0px 18px;
-
-  border-bottom: 1px solid #E1E3DF;
+  justify-content: center;
 `;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allItems: [{
-        sellerName: '',
-        // sellerStarRating: 0,
-        // sellerReviewCount: 0,
-        sellerCountry: '',
-        sellerTotalSales: 0,
-        sellerPicture: '',
-        sellerJoinDate: '',
-      }],
+      sellerInfo: {},
+      allItems: [],
+      scrollDirection: '',
+      itemsToDisplayIndex: 0,
     };
+    this.onArrowClickCallback = this.onArrowClickCallback.bind(this);
   }
 
   componentDidMount() {
@@ -31,26 +28,83 @@ class App extends React.Component {
     getAdditionalItems(itemId)
       .then((allAdditionalItems) => {
         this.setState({
+          sellerInfo: allAdditionalItems[0],
           allItems: allAdditionalItems,
         });
       })
       .catch((error) => console.error(error));
   }
 
+  onArrowClickCallback(value) {
+    const { allItems, itemsToDisplayIndex, scrollDirection } = this.state;
+    if (scrollDirection === 'left' && value === 1 && itemsToDisplayIndex === allItems.length - 5) {
+      // reset the array after going left then going right before hitting the normal reset
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: 0,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === 'right' && value === -1 && itemsToDisplayIndex === allItems.length - 8) {
+      // reset the array after going right then going left before hitting the normal reset
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: newAllItems.length - 5,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === 'left' && itemsToDisplayIndex === allItems.length - 8) {
+      // reset the array after 'going around' to the left
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: newAllItems.length - 5,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === 'right' && itemsToDisplayIndex === allItems.length - 5) {
+      // reset the array after 'going around' to the right
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: 0,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === '' && itemsToDisplayIndex === 0 && value === -1) {
+      // scrolling to the left and at the start
+      const frontOfAllItems = [...allItems].splice(0, 4);
+      const newAllItems = [...allItems].concat(frontOfAllItems);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: allItems.length - 1,
+        scrollDirection: 'left',
+      });
+    } else if (scrollDirection === '' && itemsToDisplayIndex === allItems.length - 5 && value === 1) {
+      // scrolling to the right and at the end
+      const frontOfAllItems = [...allItems].splice(0, 4);
+      const newAllItems = [...allItems].concat(frontOfAllItems);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: itemsToDisplayIndex + value,
+        scrollDirection: 'right',
+      });
+    } else {
+      // normal scrolling
+      this.setState({
+        itemsToDisplayIndex: itemsToDisplayIndex + value,
+      });
+    }
+  }
+
   render() {
-    const { allItems } = this.state;
+    const { allItems, sellerInfo, itemsToDisplayIndex } = this.state;
     return (
       <Container className="container">
-        <Seller
-          sellerName={allItems[0].sellerName}
-          // sellerStarRating={allItems[0].sellerStarRating}
-          // sellerReviewCount={allItems[0].sellerName}
-          sellerCountry={allItems[0].sellerCountry}
-          sellerTotalSales={allItems[0].sellerTotalSales}
-          sellerJoinDate={allItems[0].sellerJoinDate}
-          sellerPicture={allItems[0].sellerPicture}
+        <Seller aboutSeller={sellerInfo} />
+        <ItemContainer
+          onArrowClickCallback={this.onArrowClickCallback}
+          // splice(starting index, how many to delete)
+          allItems={[...allItems].splice(itemsToDisplayIndex, 5)}
         />
-        Additional Items
       </Container>
     );
   }
