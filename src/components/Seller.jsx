@@ -3,17 +3,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Seller = ({
-  sellerName,
-  // sellerStarRating={allItems[0].sellerStarRating}
-  // sellerReviewCount={allItems[0].sellerName}
-  // sellerTotalItems ={allItems[0].sellerTotalItems}
-  sellerCountry,
-  sellerTotalSales,
-  sellerJoinDate,
-  sellerPicture,
-}) => {
-  const sellerStarRating = 4;
+const Seller = ({ aboutSeller }) => {
+  const {
+    sellerName = 'John Doe',
+    sellerStarRating = 0,
+    sellerReviewCount = 0,
+    sellerTotalItems = 0,
+    sellerCountry = 'somewhere',
+    sellerTotalSales = 0,
+    sellerJoinDate = '2020',
+    sellerPicture = '',
+  } = aboutSeller;
 
   const SellerCont = styled.div`
     padding: 30px 0px 24px 0px;
@@ -47,7 +47,7 @@ const Seller = ({
 
   const SellerName = styled.div`
     font: 18px;
-    font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+    font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
     padding: 4px 6px 0px 0px;
     cursor: pointer;
     color: #222;
@@ -139,7 +139,7 @@ const Seller = ({
         <SellerInfoTop>
           <SellerName>{sellerName}</SellerName>
           {stars(sellerStarRating)}
-          <SellerReviewCount>(74)</SellerReviewCount>
+          <SellerReviewCount>({sellerReviewCount})</SellerReviewCount>
         </SellerInfoTop>
         <SellerInfoBottom>
           <SellerCountry>{sellerCountry}</SellerCountry>
@@ -152,32 +152,28 @@ const Seller = ({
         </SellerInfoBottom>
       </SellerContainer>
       <ViewAllItems>
-        View all 171 items
+        View all {sellerTotalItems} items
       </ViewAllItems>
     </SellerCont>
   );
 };
 
 Seller.defaultProps = {
-  sellerName: '',
-  // sellerStarRating: 0,
-  // sellerReviewCount: 0,
-  // sellerTotalItems: 0,
-  sellerCountry: '',
-  sellerTotalSales: 0,
-  sellerPicture: '',
-  sellerJoinDate: '',
+  aboutSeller: {},
 };
 
 Seller.propTypes = {
-  sellerName: PropTypes.string,
-  // sellerStarRating: PropTypes.number,
-  // sellerReviewCount: PropTypes.number,
-  // sellerTotalItems: PropTypes.number,
-  sellerCountry: PropTypes.string,
-  sellerTotalSales: PropTypes.number,
-  sellerPicture: PropTypes.string,
-  sellerJoinDate: PropTypes.string,
+  // eslint-disable-next-line react/require-default-props
+  aboutSeller: PropTypes.shape({
+    sellerName: PropTypes.string,
+    sellerStarRating: PropTypes.number,
+    sellerReviewCount: PropTypes.number,
+    sellerTotalItems: PropTypes.number,
+    sellerCountry: PropTypes.string,
+    sellerTotalSales: PropTypes.number,
+    sellerPicture: PropTypes.string,
+    sellerJoinDate: PropTypes.string,
+  }),
 };
 
 export default Seller;
