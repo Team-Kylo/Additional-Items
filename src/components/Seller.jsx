@@ -19,7 +19,7 @@ const Seller = ({ aboutSeller }) => {
     padding: 30px 0px 24px 0px;
     border-top: 1px solid #E1E3DF;
     display:flex;
-    flex-dirction: row;
+    flex-direction: row;
   `;
 
   const SellerPicture = styled.img`
@@ -32,6 +32,7 @@ const Seller = ({ aboutSeller }) => {
     line-height: 1.4;
     display:flex;
     flex-direction: column;
+    font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
   `;
 
   const SellerInfoTop = styled.div`
@@ -47,7 +48,6 @@ const Seller = ({ aboutSeller }) => {
 
   const SellerName = styled.div`
     font: 18px;
-    font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
     padding: 4px 6px 0px 0px;
     cursor: pointer;
     color: #222;
@@ -70,26 +70,22 @@ const Seller = ({ aboutSeller }) => {
     color: #757575;
     cursor: pointer;
     text-decoration: underline;
-    font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
   `;
 
   const SellerCountry = styled.div`
     font-size: 14px;
     padding-right: 24px;
-    font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
     color: #595959;
   `;
 
   const SellerTotalSales = styled.div`
     font-size: 14px;
     padding-right: 24px;
-    font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
     color: #595959;
   `;
 
   const SellerJoinDate = styled.div`
     font-size: 14px;
-    font-family:"Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
     color: #595959;
   `;
 
