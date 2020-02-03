@@ -15,7 +15,7 @@ describe('fetching data from the server API', () => {
 
   it('should recieve a JSON response and return CommonJS', async () => {
     mFetch.properFetch();
-    const additionalItems = await getAdditionalItems(3);
+    const additionalItems = await getAdditionalItems(1);
     expect(additionalItems).toEqual(mFetch.testData);
   });
 

@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { getAdditionalItems } from '../lib';
 import Seller from './Seller';
+
+const Container = styled.div`
+  padding: 0px 18px 0px 18px;
+
+  border-bottom: 1px solid #E1E3DF;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -33,8 +40,7 @@ class App extends React.Component {
   render() {
     const { allItems } = this.state;
     return (
-      <div className="container">
-        <h1>Aditional Items</h1>
+      <Container className="container">
         <Seller
           sellerName={allItems[0].sellerName}
           // sellerStarRating={allItems[0].sellerStarRating}
@@ -44,8 +50,8 @@ class App extends React.Component {
           sellerJoinDate={allItems[0].sellerJoinDate}
           sellerPicture={allItems[0].sellerPicture}
         />
-        {/* Additional Items */}
-      </div>
+        Additional Items
+      </Container>
     );
   }
 }

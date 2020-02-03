@@ -5,10 +5,10 @@ import React from 'react';
 import Seller from './Seller';
 
 describe('<Seller />', () => {
-  // it('renders to the page with the class name container', () => {
-  //   const wrap = shallow(<Seller />);
-  //   expect(wrap.exists('.container')).toEqual(true);
-  // });
+  it('renders to the page with the class name container', () => {
+    const wrap = shallow(<Seller />);
+    expect(wrap.exists()).toEqual(true);
+  });
 
   // it('Accepts a string, itemId as a prop', () => {
   //   const wrap = shallow(<Seller />);
