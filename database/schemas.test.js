@@ -9,7 +9,7 @@ const itemData = {
   itemName: 'Kylo Lightsaber',
   itemPrice: 999.00,
   itemPicture: 'urlToItemPicture',
-  itemShippingPrice: 50.00,
+  itemFreeShipping: 'yes',
   sellerPicture: 'urlToSellerPicture',
   sellerName: 'Kylo-ren',
   sellerCountry: 'United States',
@@ -42,7 +42,7 @@ describe('Item Model Test', () => {
     expect(savedItem.itemName).toBe(itemData.itemName);
     expect(savedItem.itemPrice).toBe(itemData.itemPrice);
     expect(savedItem.itemPicture).toBe(itemData.itemPicture);
-    expect(savedItem.itemShippingPrice).toBe(itemData.itemShippingPrice);
+    expect(savedItem.itemFreeShipping).toBe(itemData.itemFreeShipping);
     expect(savedItem.sellerPicture).toBe(itemData.sellerPicture);
     expect(savedItem.sellerName).toBe(itemData.sellerName);
     expect(savedItem.sellerCountry).toBe(itemData.sellerCountry);

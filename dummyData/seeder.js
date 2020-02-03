@@ -2,7 +2,7 @@ const { generateData } = require('./dataSeeder');
 const db = require('../database');
 
 const populateDatabase = () => {
-  const fakeData = generateData();
+  const fakeData = generateData(100);
 
   db.addManyItems(fakeData)
     .then(() => {

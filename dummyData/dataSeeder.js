@@ -4,7 +4,7 @@ Generates fake data for 10 sellers with 10 items each.  Can be modified on line 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const faker = require('faker');
 
-const generateData = (numOfSellers = 100, numOfItemsPerSeller = Math.floor(Math.random() * 50)) => {
+const generateData = (numOfSellers, numOfItemsPerSeller) => {
   const arrayOfFakeData = [];
   let k = 1;
   // needs to start at 10 for the url for the pictures to take up 2 slots
@@ -26,8 +26,10 @@ const generateData = (numOfSellers = 100, numOfItemsPerSeller = Math.floor(Math.
     // needs to start at 10 for the url for the pictures to take up 2 slots
     let j = 0;
 
+    const numOfItems = numOfItemsPerSeller || Math.floor(Math.random() * 50);
+
     // while loop for the items
-    while (j < numOfItemsPerSeller) {
+    while (j < numOfItems) {
       const generatedItemInfo = {};
 
       // makes a copy of the seller as to not reference the same obj in memory
