@@ -11,6 +11,8 @@ const itemSchema = new mongoose.Schema({
   sellerCountry: String,
   sellerTotalSales: Number,
   sellerJoinDate: Date,
+  sellerStarRating: Number,
+  sellerReviewCount: Number,
 });
 
 module.exports.Item = mongoose.model('Item', itemSchema);
