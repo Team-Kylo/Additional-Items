@@ -9,7 +9,7 @@ const itemEntry = ({ item }) => {
     itemName = null,
     itemPrice = null,
     itemPicture = null,
-    freeShipping = 'yes',
+    itemFreeShipping = 'yes',
   } = item;
 
   const ItemDiv = styled.div`
@@ -96,7 +96,7 @@ const itemEntry = ({ item }) => {
     <ItemDiv>
       <ItemImage />
       <ItemName>{itemName}</ItemName>
-      {freeShippingOption(freeShipping)}
+      {freeShippingOption(itemFreeShipping)}
     </ItemDiv>
   );
 };
@@ -106,7 +106,7 @@ itemEntry.propTypes = {
     itemName: PropTypes.string,
     itemPrice: PropTypes.number,
     itemPicture: PropTypes.string,
-    freeShipping: PropTypes.string,
+    itemFreeShipping: PropTypes.string,
   }),
 };
 

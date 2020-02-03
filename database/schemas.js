@@ -5,7 +5,7 @@ const itemSchema = new mongoose.Schema({
   itemName: String,
   itemPrice: Number,
   itemPicture: String,
-  itemShippingPrice: Number,
+  itemFreeShipping: Number,
   sellerPicture: String,
   sellerName: String,
   sellerCountry: String,
