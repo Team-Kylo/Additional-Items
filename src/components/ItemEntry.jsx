@@ -9,7 +9,7 @@ const itemEntry = ({ item }) => {
     itemName = null,
     itemPrice = null,
     itemPicture = null,
-    freeShipping = 'no',
+    freeShipping = 'yes',
   } = item;
 
   const ItemDiv = styled.div`

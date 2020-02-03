@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -16,6 +17,7 @@ class App extends React.Component {
     this.state = {
       sellerInfo: {},
       allItems: [],
+      scrollDirection: '',
       itemsToDisplayIndex: 0,
     };
     this.onArrowClickCallback = this.onArrowClickCallback.bind(this);
@@ -33,12 +35,64 @@ class App extends React.Component {
       .catch((error) => console.error(error));
   }
 
-  // will need a callback that takes +1 or -1 so that the images can scroll
   onArrowClickCallback(value) {
-    const { itemsToDisplayIndex } = this.state;
-    this.setState({
-      itemsToDisplayIndex: itemsToDisplayIndex + value,
-    });
+    const { allItems, itemsToDisplayIndex, scrollDirection } = this.state;
+    if (scrollDirection === 'left' && value === 1 && itemsToDisplayIndex === allItems.length - 5) {
+      // reset the array after going left then going right before hitting the normal reset
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: 0,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === 'right' && value === -1 && itemsToDisplayIndex === allItems.length - 8) {
+      // reset the array after going right then going left before hitting the normal reset
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: newAllItems.length - 5,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === 'left' && itemsToDisplayIndex === allItems.length - 8) {
+      // reset the array after 'going around' to the left
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: newAllItems.length - 5,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === 'right' && itemsToDisplayIndex === allItems.length - 5) {
+      // reset the array after 'going around' to the right
+      const newAllItems = [...allItems].splice(0, allItems.length - 4);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: 0,
+        scrollDirection: '',
+      });
+    } else if (scrollDirection === '' && itemsToDisplayIndex === 0 && value === -1) {
+      // scrolling to the left and at the start
+      const frontOfAllItems = [...allItems].splice(0, 4);
+      const newAllItems = [...allItems].concat(frontOfAllItems);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: allItems.length - 1,
+        scrollDirection: 'left',
+      });
+    } else if (scrollDirection === '' && itemsToDisplayIndex === allItems.length - 5 && value === 1) {
+      // scrolling to the right and at the end
+      const frontOfAllItems = [...allItems].splice(0, 4);
+      const newAllItems = [...allItems].concat(frontOfAllItems);
+      this.setState({
+        allItems: newAllItems,
+        itemsToDisplayIndex: itemsToDisplayIndex + value,
+        scrollDirection: 'right',
+      });
+    } else {
+      // normal scrolling
+      this.setState({
+        itemsToDisplayIndex: itemsToDisplayIndex + value,
+      });
+    }
   }
 
   render() {
