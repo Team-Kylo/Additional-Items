@@ -19,6 +19,8 @@ const generateData = (numOfSellers = 100, numOfItemsPerSeller = Math.floor(Math.
       sellerTotalSales: Math.floor(Math.random() * 500),
       sellerJoinDate: faker.date.past(),
       sellerPicture: `https://www.placecage.com/300/${300 + i}`,
+      sellerStarRating: Math.floor(Math.random() * 2 + 3),
+      sellerReviewCount: Math.floor(Math.random() * 800 + 25),
     };
 
     // needs to start at 10 for the url for the pictures to take up 2 slots
@@ -37,7 +39,7 @@ const generateData = (numOfSellers = 100, numOfItemsPerSeller = Math.floor(Math.
       generatedItemInfo.itemId = k;
       generatedItemInfo.itemName = faker.commerce.productName();
       generatedItemInfo.itemPrice = faker.commerce.price();
-      generatedItemInfo.itemPicture = `https://i.picsum.photos/id/${100 + j + i}/300/300.jpg`;
+      generatedItemInfo.itemPicture = `https://i.picsum.photos/id/${400 + j + i}/300/300.jpg`;
 
       // decide if it is free shipping or elgible
       const freeShippingGenerator = Math.floor(Math.random() * 15);
