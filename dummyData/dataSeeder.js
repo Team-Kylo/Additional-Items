@@ -41,7 +41,7 @@ const generateData = (numOfSellers, numOfItemsPerSeller) => {
       generatedItemInfo.itemId = k;
       generatedItemInfo.itemName = faker.commerce.productName();
       generatedItemInfo.itemPrice = faker.commerce.price();
-      generatedItemInfo.itemPicture = `https://i.picsum.photos/id/${400 + j + i}/300/300.jpg`;
+      generatedItemInfo.itemPicture = `https://i.picsum.photos/id/${400 + (j * i) + i}/300/300.jpg`;
 
       // decide if it is free shipping or elgible
       const freeShippingGenerator = Math.floor(Math.random() * 15);
