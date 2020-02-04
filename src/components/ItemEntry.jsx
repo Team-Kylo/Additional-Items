@@ -19,7 +19,9 @@ const itemEntry = ({ item }) => {
   `;
 
   const ItemImage = styled.img`
-    content: url(${itemPicture});
+    display: block;
+    overflow: hidden;
+    white-space: pre-wrap;
     height: 174.844px;
     width: 220.188px;
   `;
@@ -94,7 +96,7 @@ const itemEntry = ({ item }) => {
 
   return (
     <ItemDiv>
-      <ItemImage />
+      <ItemImage src={itemPicture} alt="IMAGE NOT AVAILABLE" />
       <ItemName>{itemName}</ItemName>
       {freeShippingOption(freeShipping)}
     </ItemDiv>
