@@ -19,7 +19,6 @@ describe('Database Seeding and Querying', () => {
           process.exit(1);
         }
       });
-
     generatedItems = await generateData(numberOfSellers, numberOfItems);
   });
 
@@ -27,8 +26,8 @@ describe('Database Seeding and Querying', () => {
     await mongoose.connection.close();
   });
 
-  it('should generate 100 items by default', async () => {
-    const tempData = generateData();
+  it('should generate 100 items when asked', async () => {
+    const tempData = generateData(10, 10);
     expect(tempData.length).toBe(100);
   });
 

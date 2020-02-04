@@ -5,12 +5,14 @@ const itemSchema = new mongoose.Schema({
   itemName: String,
   itemPrice: Number,
   itemPicture: String,
-  itemShippingPrice: Number,
+  itemFreeShipping: String,
   sellerPicture: String,
   sellerName: String,
   sellerCountry: String,
   sellerTotalSales: Number,
   sellerJoinDate: Date,
+  sellerStarRating: Number,
+  sellerReviewCount: Number,
 });
 
 module.exports.Item = mongoose.model('Item', itemSchema);
