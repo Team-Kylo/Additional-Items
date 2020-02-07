@@ -37,11 +37,13 @@ const generateData = (numOfSellers, numOfItemsPerSeller) => {
         generatedItemInfo[key] = value;
       });
 
+      const randomImgUrl = Math.floor(Math.random() * 1000);
+
       // data for individual items
       generatedItemInfo.itemId = k;
       generatedItemInfo.itemName = faker.commerce.productName();
-      generatedItemInfo.itemPrice = faker.commerce.price();
-      generatedItemInfo.itemPicture = `https://i.picsum.photos/id/${200 + (j * i) + i}/300/300.jpg`;
+      generatedItemInfo.itemPrice = (Math.random() * 1200).toFixed(2);
+      generatedItemInfo.itemPicture = `https://i.picsum.photos/id/${randomImgUrl}/300/300.jpg`;
 
       // decide if it is free shipping or elgible
       const freeShippingGenerator = Math.floor(Math.random() * 15);

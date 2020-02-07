@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/:id', (req, res) => {
+app.get('/additional/:id', (req, res) => {
   console.log(`responding to GET for ${req.params.id}`);
 
   // eslint-disable-next-line no-restricted-globals
