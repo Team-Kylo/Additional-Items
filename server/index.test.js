@@ -39,7 +39,7 @@ describe('API endpoint with /:id', () => {
   it('should return with a 400 error if sent an invalid input', (done) => {
     endpoint
       .get('/Foobar')
-      .expect(400)
+      .expect(404)
       .end(done);
   });
 

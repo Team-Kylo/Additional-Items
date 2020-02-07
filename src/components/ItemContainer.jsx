@@ -5,44 +5,44 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ItemEntry from './ItemEntry';
 
+const ItemContainer = styled.div`
+border-bottom: 1px solid #E1E3DF;
+display:flex;
+padding-bottom: 24px;
+flex-direction: row;
+`;
+
+const ArrowBuffer = styled.div`
+height: 30%
+`;
+
+const ArrowContainer = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
+const Arrow = styled.button`
+background: #FFFFFF;
+margin: 0px;
+height: 43px;
+width: 43px;
+border-radius: 50%;
+border-width: 0px;
+font-size: 38px;
+padding: 0px;
+box-shadow:
+  0 0 5px 5px rgb(0, 0, 0, 0.07),
+  0 0 0px 0px rgb(0, 0, 0, 0.07);
+:hover {
+  box-shadow:
+    0 0 5px 5px rgb(0, 0, 0, 0.15),
+    0 0 0px 0px rgb(0, 0, 0, 0.15);
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+`;
+
 const itemContainer = ({ allItems, onArrowClickCallback }) => {
-  const ItemContainer = styled.div`
-    border-bottom: 1px solid #E1E3DF;
-    display:flex;
-    padding-bottom: 24px;
-    flex-direction: row;
-  `;
-
-  const ArrowBuffer = styled.div`
-    height: 30%
-  `;
-
-  const ArrowContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-  `;
-
-  const Arrow = styled.button`
-    background: #FFFFFF;
-    margin: 0px;
-    height: 43px;
-    width: 43px;
-    border-radius: 50%;
-    border-width: 0px;
-    font-size: 38px;
-    padding: 0px;
-    box-shadow:
-      0 0 5px 5px rgb(0, 0, 0, 0.07),
-      0 0 0px 0px rgb(0, 0, 0, 0.07);
-    :hover {
-      box-shadow:
-        0 0 5px 5px rgb(0, 0, 0, 0.15),
-        0 0 0px 0px rgb(0, 0, 0, 0.15);
-      cursor: pointer;
-      background-color: #f9f9f9;
-    }
-  `;
-
   // eslint-disable-next-line consistent-return
   const onArrowClick = (e) => {
     const classNameArray = e.target.className.split(' ');

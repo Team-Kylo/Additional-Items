@@ -6,9 +6,13 @@ import { getAdditionalItems } from '../lib';
 import Seller from './Seller';
 import ItemContainer from './ItemContainer';
 
+const OuterDiv = styled.div`
+  display:flex;
+  justify-content: center;
+`;
+
 const Container = styled.div`
   padding: 0px 18px 0px 18px;
-  justify-content: center;
 `;
 
 class App extends React.Component {
@@ -100,18 +104,19 @@ class App extends React.Component {
   render() {
     const { allItems, sellerInfo, itemsToDisplayIndex } = this.state;
     return (
-      <Container className="container">
-        <Seller aboutSeller={sellerInfo} />
-        <ItemContainer
-          onArrowClickCallback={this.onArrowClickCallback}
-          // splice(starting index, how many to delete)
-          allItems={[...allItems].splice(itemsToDisplayIndex, 5)}
-        />
-      </Container>
+      <OuterDiv>
+        <Container className="container">
+          <Seller aboutSeller={sellerInfo} />
+          <ItemContainer
+            onArrowClickCallback={this.onArrowClickCallback}
+            // splice(starting index, how many to delete)
+            allItems={[...allItems].splice(itemsToDisplayIndex, 5)}
+          />
+        </Container>
+      </OuterDiv>
     );
   }
 }
-
 
 App.defaultProps = {
   itemId: '1',
