@@ -105,7 +105,7 @@ class App extends React.Component {
     const { allItems, sellerInfo, itemsToDisplayIndex } = this.state;
     return (
       <OuterDiv>
-        <Container className="container">
+        <Container className="additionalItemsContainer">
           <Seller aboutSeller={sellerInfo} />
           <ItemContainer
             onArrowClickCallback={this.onArrowClickCallback}
