@@ -81,7 +81,7 @@ const SellerJoinDate = styled.div`
 `;
 
 const ButtonDiv = styled.div`
-  width: -webkit-fill-available;
+  width: 54%;
   display: flex;
   justify-content: flex-end;
 `;
