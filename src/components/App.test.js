@@ -13,6 +13,6 @@ describe('<App />', () => {
   it('Renders to the page with the class name container', () => {
     const wrapper = shallow(<App itemId="1" />);
     mFetch.properFetch(mFetch.testData);
-    expect(wrapper.exists('.container')).toEqual(true);
+    expect(wrapper.exists('.additionalItemsContainer')).toEqual(true);
   });
 });
