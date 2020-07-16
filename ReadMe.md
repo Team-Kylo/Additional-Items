@@ -1,9 +1,23 @@
-This will be the component that renders the additional items for sale from the seller.
+# Crafty
+Full-stack application composed of several microservices that were brought together as a product page.
 
-Port:  Set up to use process.env.ADDITIONAL_ITEMS_PORT variable.  Defaults to 3004 if the .env is not set up.
+## Additional Items
+Microservice that shows additional products from the current seller. Allows the user to endlessly scroll in either direction.
 
-Server start script: npm start
+## Technology Used
+* Node.js w/ Express
+* MongoDB w/ Mongoose
+* React
+* Styled Components
+* Webpack
+* Jest
 
-Build script: npm run build
-
-Database seeding script: npm run seed
+## How to Use
+Command | Result
+----------|---------
+`npm run seed` | Seeds MongoDB with 10 sellers with 10 items each
+`npm run dev:build` | Builds webpack bundle, watching, in developement mode
+`npm run dev:start` | Starts the server with nodemon
+`npm run build` | Build bundle in production mode
+`npm run start` | Starts the server with node
+`npm test` | Runs Jest test suite
